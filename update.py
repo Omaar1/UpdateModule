@@ -2,20 +2,9 @@ import subprocess
 import os
 
 def update():
-### Search for Spector direcory
-###	*** Choose only the first directory path if multiple paths is returned ***
-	os.chdir(os.path.expanduser("~"))
-	try :
-		cmd = r"sudo find / -type d -name Spector -print -quit  2>/dev/null"
-		directory = subprocess.check_output(cmd , stderr=subprocess.STDOUT, shell = True )
 
-		line =directory.splitlines()[0]  ###
-		print(line )
-	except subprocess.CalledProcessError as e:
-        	print(e)
-        	exit(1)
 ### change directory to spector directory to be able to use git commands
-	os.chdir(line)
+	print("current directory : "os.getcwd())
 ### get current local Commit_ID
 	try:
 		local = subprocess.check_output(r"git log -1  --pretty=format:\"%H ",shell = True)
