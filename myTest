@@ -1,0 +1,236 @@
+information about the system on which the test is running ::  required modules not installed ...yet :D !
+
+root@kali:~/Desktop# uname -a
+Linux kali 4.9.0-kali3-amd64 #1 SMP Debian 4.9.18-1kali1 (2017-04-04) x86_64 GNU/Linux
+root@kali:~/Desktop# python -V
+Python 2.7.14
+
+
+
+
+
+########################## i dont know what is wrong with pip but installing dependencies directly from cmd worked fine !!??
+root@kali:~/Desktop/Spector# pip install requirements.txt
+Collecting requirements.txt
+  Could not find a version that satisfies the requirement requirements.txt (from versions: )
+No matching distribution found for requirements.txt
+
+
+
+
+
+
+
+
+######################### Add ( pyspin & scapy )to requirements.txt
+root@kali:~/Desktop/Spector# python spector.py
+Traceback (most recent call last):
+  File "spector.py", line 10, in <module>
+    from loading import loading
+  File "/root/Desktop/Spector/loading.py", line 6, in <module>
+    from pyspin.spin import Spin5, Spinner
+ImportError: No module named pyspin.spin
+
+
+
+
+
+
+
+
+###################### i am logged as root but it seems that spector doesnt believe me XD ..i have to use sudo :D
+
+ root@kali:~/Desktop/Spector# python spector.py
+Loading All Modules, Please wait ...
+▋Done :D
+
+
+ _______  _______  ______   _______ _________ _______  _______
+(  ____ \(  ____ )/ ___  \ (  ____ \__   __/(  __   )(  ____ )
+| (    \/| (    )|\/   \  \| (    \/   ) (   | (  )  || (    )|
+| (_____ | (____)|   ___) /| |         | |   | | /   || (____)|
+(_____  )|  _____)  (___ ( | |         | |   | (/ /) ||     __)
+      ) || (            ) \| |         | |   |   / | || (\ (
+/\____) || )      /\___/  /| (____/\   | |   |  (__) || ) \ \__
+\_______)|/       \______/ (_______/   )_(   (_______)|/   \__/
+
+Created by Salus Lab
+
+[x] Script need root access
+
+
+
+
+
+
+
+
+
+
+######################### hosts module raise an error !!
+spector > hosts
+---------------------Scanned Host IPs-------------------
+Traceback (most recent call last):
+  File "spector.py", line 16, in <module>
+    interactive_mode()
+  File "/root/Desktop/Spector/interactive.py", line 26, in interactive_mode
+    get_all_scanned_hosts()
+  File "/root/Desktop/Spector/hosts.py", line 8, in get_all_scanned_hosts
+    res = requests.get("http://localhost:5984/_all_dbs")
+  File "/usr/lib/python2.7/dist-packages/requests/api.py", line 72, in get
+    return request('get', url, params=params, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/api.py", line 58, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 502, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/sessions.py", line 612, in send
+    r = adapter.send(request, **kwargs)
+  File "/usr/lib/python2.7/dist-packages/requests/adapters.py", line 504, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=5984): Max retries exceeded with url: /_all_dbs (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7f96053fc850>: Failed to establish a new connection: [Errno 111] Connection refused',))
+
+
+
+
+
+
+
+
+
+
+#########################  command list doesnt show that i can use "back"
+[?] Showing Command list
+[-] scan
+[-] hosts
+[-] update
+[-] exploit
+[-] exit
+spector > scan
+[?] Enumeration Tools:
+[-] NMAP
+[-] NIKTO
+[-] WPSCAN
+[-] Exit
+spector/scan > back
+spector >
+
+
+
+
+
+
+
+######################  in scan menu .. how to show the list again ??
+spector/scan > help
+[x] Under Development
+spector/scan > ?
+[x] Under Development
+
+
+
+
+
+
+
+########################### nmap scans all IPs in database (the one i entered  [plus the IPs i entered before ] )
+?] Enter IP [10.10.10.10] or Range [10.0.10.10/24] : 192.168.1.3
+[+] Single IP is Provided
+Pinging 192.168.1.3
+[+] 192.168.1.3 is live
+[-] Live IPs to Scan
+[+] 192.168.1.4 is live     -----> [DB]
+[+] 192.168.1.5 is live	    -----> [DB]
+[+] 192.168.1.3 is live
+[-] Scanner Started for Target : 192.168.1.4 	----[why it started for those - time consuming]
+[-] Scanner Started for Target : 192.168.1.5 	---- ?!!
+[-] Scanner Started for Target : 192.168.1.3
+----------------------------------------------------
+Host : 192.168.1.4 	Hostname : huawei_kii-l21-c7bd070631
+State : up
+Mac Address : 1C:67:58:57:E4:BE 	Name : Huawei Technologies
+----------------------------------------------------
+Scanning 192.168.1.4 Complete
+[-] Updating Database Profile
+[-] Checking Profile machine_192_168_1_4 for 192.168.1.4
+----------------------------------------------------
+Host : 192.168.1.3 	Hostname : 192.168.1.3
+State : up
+----------------------------------------------------
+Protocol : tcp
+port : 135	state : open 	Service Name: msrpc 	Service Version :
+port : 9090	state : open 	Service Name: http 	Service Version : 9.4.z-SNAPSHOT
+osmatch.name : FreeBSD 6.2-RELEASE
+osmatch.accuracy : 90a
+osmatch.line : 25801
+osmatch.name : Microsoft Windows Server 2008 SP1
+osmatch.accuracy : 87
+osmatch.line : 70403
+osmatch.name : Microsoft Windows 7
+osmatch.accuracy : 87
+osmatch.line : 71672
+osmatch.name : Microsoft Windows 10 build 10586 - 14393
+osmatch.accuracy : 86
+osmatch.line : 65405
+osmatch.name : Microsoft Windows Phone 7.5 or 8.0
+osmatch.accuracy : 85
+osmatch.line : 74217
+Mac Address : 90:48:9A:F5:65:D3 	Name : Hon Hai Precision Ind.
+----------------------------------------------------
+Scanning 192.168.1.3 Complete
+[-] Updating Database Profile
+[-] Checking Profile machine_192_168_1_3 for 192.168.1.3
+----------------------------------------------------
+Host : 192.168.1.5 	Hostname : windows-phone
+State : up
+Mac Address : 48:50:73:88:7D:E4 	Name : Microsoft
+----------------------------------------------------
+Scanning 192.168.1.5 Complete
+[-] Updating Database Profile
+[-] Checking Profile machine_192_168_1_5 for 192.168.1.5
+spector/scan >
+
+
+
+
+
+
+
+
+
+
+########################## nmap  raise error when typing nothing OR wrong IPs
+
+spector/scan > nmap
+[?] Enter IP [10.10.10.10] or Range [10.0.10.10/24] : .
+Traceback (most recent call last):
+  File "spector.py", line 16, in <module>
+    interactive_mode()
+  File "/root/Desktop/Spector/interactive.py", line 21, in interactive_mode
+    scan_hosts()
+  File "/root/Desktop/Spector/scan_host.py", line 20, in scan_hosts
+    ips = generate_range(input_ip)
+  File "/root/Desktop/Spector/ip_generator.py", line 7, in generate_range
+    generated_ips = netaddr.IPNetwork(input_ip)
+  File "/usr/lib/python2.7/dist-packages/netaddr/ip/__init__.py", line 938, in __init__
+    raise AddrFormatError('invalid IPNetwork %s' % addr)
+netaddr.core.AddrFormatError: invalid IPNetwork .
+
+
+
+
+
+
+
+
+
+
+
+***** i've added the Update module to the directory  ,  imported and called it in interactive.py
+***** there was an error when running spector from outside its directory  --->  [ sudo python Desktop/Spector/spector.py ]
+
+		spector > update
+		[-] Checking for new Updated
+		current directory : /root/Desktop
+		fatal: Not a git repository (or any of the parent directories): .git
+
+***** i've updated my git repo and now it works fine : D
