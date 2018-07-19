@@ -3,8 +3,7 @@ import os
 
 def update():
 
-### change directory to spector directory to be able to use git commands
-	print("current directory : "os.getcwd())
+
 ### get current local Commit_ID
 	try:
 		local = subprocess.check_output(r"git log -1  --pretty=format:\"%H ",shell = True)
