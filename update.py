@@ -2,6 +2,12 @@ import subprocess
 import os
 
 def update():
+	
+	
+### change directory to spector directory to be able to use git commands
+	print("current directory : "+os.getcwd())
+	dirname, filename = os.path.split(os.path.abspath(__file__))
+	os.chdir(dirname)
 
 
 ### get current local Commit_ID
